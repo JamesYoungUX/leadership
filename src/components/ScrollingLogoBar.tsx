@@ -41,28 +41,28 @@ export default function ScrollingLogoBar() {
   }, []);
 
   const logos = [
-    { name: 'Google', color: '#4285F4' },
-    { name: 'Microsoft', color: '#00A4EF' },
-    { name: 'Apple', color: '#A2AAAD' },
+    { name: 'Boeing', color: '#4285F4' },
+    { name: 'Diapers.com', color: '#00A4EF' },
+    { name: 'Razorfish', color: '#9843FF' },
     { name: 'Amazon', color: '#FF9900' },
-    { name: 'Meta', color: '#1877F2' },
+    { name: 'Deloitte', color: '#86BC24' },
     { name: 'W.W. Grainger', color: '#C8102E' },
-    { name: 'Spotify', color: '#1DB954' },
-    { name: 'Uber', color: '#000000' },
+    { name: 'Hostway', color: '#FF0000' },
+    { name: 'Harpo Productions', color: '#00FF00' },
     { name: 'Bravado Health', color: '#E6E6FA' },
     { name: 'Pearl Health', color: '#FFFFFF' },
     { name: 'Press Ganey', color: '#FF00FF' },
     { name: 'Humana', color: '#5BA908' },
     { name: 'CVS Healthcare', color: '#cc0000' },
     // Duplicate logos for seamless loop
-    { name: 'Google', color: '#4285F4' },
-    { name: 'Microsoft', color: '#00A4EF' },
-    { name: 'Apple', color: '#A2AAAD' },
+    { name: 'Boeing', color: '#4285F4' },
+    { name: 'Diapers.com', color: '#00A4EF' },
+    { name: 'Razorfish', color: '#9843FF' },
     { name: 'Amazon', color: '#FF9900' },
-    { name: 'Meta', color: '#1877F2' },
+    { name: 'Deloitte', color: '#86BC24' },
     { name: 'W.W. Grainger', color: '#C8102E' },
-    { name: 'Spotify', color: '#1DB954' },
-    { name: 'Uber', color: '#000000' },
+    { name: 'Hostway', color: '#FF0000' },
+    { name: 'Harpo Productions', color: '#00FF00' },
     { name: 'Bravado Health', color: '#E6E6FA' },
     { name: 'Pearl Health', color: '#FFFFFF' },
     { name: 'Press Ganey', color: '#FF00FF' },
@@ -70,7 +70,7 @@ export default function ScrollingLogoBar() {
     { name: 'CVS Healthcare', color: '#cc0000' },
   ];
 
-  return (
+    return (
     <section className="py-16 w-full bg-[#1a1a1a]">
       <div className="w-full px-4">
         <div className="text-center mb-12">
