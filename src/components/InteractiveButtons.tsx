@@ -122,13 +122,17 @@ export default function InteractiveButtons() {
 
       // Get the measured width of the active button
       const currentButtonWidth = buttonWidths[activeButton];
-      const duration = 8000; // 8 seconds in milliseconds
+      const baseDuration = 8000; // 8 seconds base duration
+      const baseWidth = 200; // Base width for desktop buttons
+      
+      // Adjust duration based on button width - wider buttons get more time
+      const duration = Math.max(baseDuration, (currentButtonWidth / baseWidth) * baseDuration);
       const frameRate = 60; // 60fps
       const frameDuration = 1000 / frameRate; // ~16.67ms
       const totalFrames = duration / frameDuration;
       const progressIncrement = currentButtonWidth / totalFrames; // Progress in pixels
 
-      console.log('Desktop timer setup:', { currentButtonWidth, progressIncrement, totalFrames });
+      console.log('Timer setup:', { currentButtonWidth, duration, progressIncrement, totalFrames });
 
       let frameCount = 0;
       const maxFrames = Math.floor(totalFrames); // Ensure it's an integer
@@ -140,11 +144,11 @@ export default function InteractiveButtons() {
         const clampedProgress = Math.min(progress, currentButtonWidth);
         setTimeProgress(clampedProgress);
         
-        console.log('Desktop progress update:', { progress: clampedProgress, frameCount, maxFrames });
+        console.log('Progress update:', { progress: clampedProgress, frameCount, maxFrames });
         
         if (clampedProgress >= currentButtonWidth) {
           // Timer complete, move to next button
-          console.log('Desktop timer complete');
+          console.log('Timer complete');
           timerStartedRef.current = false; // Reset flag for next button
           setActiveButton(prevButton => {
             const nextButton = (prevButton + 1) % 5;
@@ -155,7 +159,7 @@ export default function InteractiveButtons() {
           timeoutRef.current = setTimeout(() => startTimer(), 200);
         } else if (frameCount >= maxFrames) {
           // Force completion if we've reached max frames
-          console.log('Desktop timer forced completion');
+          console.log('Timer forced completion');
           timerStartedRef.current = false; // Reset flag for next button
           setTimeProgress(currentButtonWidth);
           setActiveButton(prevButton => {
@@ -236,7 +240,9 @@ export default function InteractiveButtons() {
           <h1 className="font-satoshi text-[#111] text-2xl md:text-[5rem] font-black tracking-tight leading-none">
             Design Leadership Capabilities
           </h1>
-          <div className="flex justify-center gap-1 mt-26 w-3/5 mx-auto overflow-visible">
+          
+          {/* Desktop Layout - Original structure preserved */}
+          <div className="hidden md:flex justify-center gap-1 mt-26 w-3/5 mx-auto overflow-visible">
             <button 
               ref={buttonRefs[0]}
               className={`flex items-center gap-3 px-1 py-1 pr-4 backdrop-blur-sm rounded-lg transition-all duration-300 group relative overflow-hidden border border-red-500/30 ${
@@ -358,7 +364,7 @@ export default function InteractiveButtons() {
               <span className="text-[#333] font-semibold relative z-10 text-base uppercase">Innovation</span>
             </button>
           </div>
-          <div className="mt-1 p-12 backdrop-blur-sm rounded-lg border border-white/10 w-3/5 mx-auto min-h-[400px]" style={{backgroundColor: 'rgb(177,197,206)'}}>
+          <div className="hidden md:block mt-1 p-12 backdrop-blur-sm rounded-lg border border-white/10 w-3/5 mx-auto min-h-[400px]" style={{backgroundColor: 'rgb(177,197,206)'}}>
             <div className="flex">
               {/* Left Column - 40% */}
               <div className="w-[40%] pr-6 text-left">
@@ -377,6 +383,66 @@ export default function InteractiveButtons() {
                 {/* Right column content can be added here */}
               </div>
             </div>
+          </div>
+
+          {/* Mobile Layout - Vertical buttons with panel beneath active button */}
+          <div className="md:hidden mt-8 space-y-0">
+            {[0, 1, 2, 3, 4].map((index) => (
+              <div key={index} className="space-y-2">
+                <button 
+                  ref={buttonRefs[index]}
+                  className={`w-full flex items-center gap-3 px-4 py-3 backdrop-blur-sm rounded-lg transition-all duration-300 group relative overflow-hidden border ${
+                    index === 0 ? 'border-red-500/30' :
+                    index === 1 ? 'border-green-500/30' :
+                    index === 2 ? 'border-blue-500/30' :
+                    index === 3 ? 'border-yellow-500/30' :
+                    'border-purple-500/30'
+                  } ${
+                    activeButton === index ? 'bg-white/20' : 'bg-white/10 hover:bg-white/20'
+                  }`}
+                  onClick={() => handleButtonClick(index)}
+                >
+                  <div 
+                    className={`absolute left-0 top-0 bottom-0 transition-all duration-300`}
+                    style={{ 
+                      width: activeButton === index ? `${timeProgress}px` : '0px',
+                      backgroundColor: 'rgb(177,197,206)',
+                      height: '100%'
+                    }}
+                  />
+                  <div className={`w-12 h-12 rounded-md flex items-center justify-center relative z-10 ${
+                    index === 0 ? 'bg-red-500/20' :
+                    index === 1 ? 'bg-green-500/20' :
+                    index === 2 ? 'bg-blue-500/20' :
+                    index === 3 ? 'bg-yellow-500/20' :
+                    'bg-purple-500/20'
+                  }`}>
+                    <img src={
+                      index === 0 ? "https://cdn.prod.website-files.com/66e53bf67b6fc1646ce0777e/6752eb5f691796371f775ca9_Coins.svg" :
+                      index === 1 ? "https://cdn.prod.website-files.com/66e53bf67b6fc1646ce0777e/6752eb8f589e8997cda73fcb_Casg.svg" :
+                      index === 2 ? "https://cdn.prod.website-files.com/66e53bf67b6fc1646ce0777e/6752eb8f355c535a4270b03c_Stack.svg" :
+                      index === 3 ? "https://cdn.prod.website-files.com/66e53bf67b6fc1646ce0777e/6752eb8fa121f6a1309c0af2_Atom.svg" :
+                      "https://cdn.prod.website-files.com/66e53bf67b6fc1646ce0777e/6752eb8fa121f6a1309c0af2_Atom.svg"
+                    } loading="lazy" alt="" className="w-6 h-6" />
+                  </div>
+                  <span className="text-[#333] font-semibold relative z-10 text-sm uppercase">{panelContent[index].title}</span>
+                </button>
+                
+                {/* Panel appears beneath active button on mobile */}
+                {activeButton === index && (
+                  <div className="p-6 backdrop-blur-sm rounded-lg border border-white/10" style={{backgroundColor: 'rgb(177,197,206)'}}>
+                    <div className="text-xs text-gray-600 mb-2">
+                      Progress: {timeProgress.toFixed(1)}px / {buttonWidths[activeButton]?.toFixed(0) || 'measuring...'}px | 
+                      Duration: 8.0s
+                    </div>
+                    <h2 className="text-[32px] font-extrabold text-gray-800 mb-2">{panelContent[index].title}</h2>
+                    <p className="text-lg font-light text-gray-800">
+                      {panelContent[index].description}
+                    </p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>
