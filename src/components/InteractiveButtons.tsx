@@ -223,8 +223,13 @@ export default function InteractiveButtons() {
 
   return (
     <section className="pb-32 pt-0 w-full" style={{backgroundColor: 'rgb(34, 34, 34)'}}>
-      <div className="w-full px-2 pt-26 pb-26" style={{backgroundColor: 'rgb(95, 111, 119)', marginLeft: '8px', marginRight: '8px', borderRadius: '1126px', boxShadow: 'inset 0 0 40px rgba(255, 255, 255, 0.2)'}}>
-        <div className="text-center">
+      <div className="w-full px-2 pt-26 pb-26" style={{backgroundColor: '#92a6b0', marginLeft: '8px', marginRight: '8px', borderRadius: '16px', boxShadow: 'inset 0 0 40px rgba(255, 255, 255, 0.2)'}}>
+        <div className="text-center" style={{paddingTop: '104px'}}>
+          <div style={{marginBottom: '104px'}}>
+            <h2 className="font-satoshi text-base font-normal tracking-tight leading-none" style={{color: 'rgb(95, 111, 119)'}}>
+              [ EFFECTIVE, EFFICIENT AND FLEXIBLE ]
+            </h2>
+          </div>
           <h1 className="font-satoshi text-[rgb(213,225,231)] text-2xl md:text-[5rem] font-bold tracking-tight leading-none" style={{ textShadow: "0 8px 32px #0008" }}>
             Unparalleled
           </h1>
@@ -353,15 +358,25 @@ export default function InteractiveButtons() {
               <span className="text-[#333] font-semibold relative z-10 text-base uppercase">Innovation</span>
             </button>
           </div>
-          <div className="mt-1 p-6 backdrop-blur-sm rounded-lg border border-white/10 w-3/5 mx-auto" style={{backgroundColor: 'rgb(177,197,206)'}}>
-            <div className="text-xs text-gray-600 mb-2">
-              Active Button: {activeButton} | Progress: {timeProgress.toFixed(1)}px / {buttonWidths[activeButton]?.toFixed(0) || 'measuring...'}px | 
-              Duration: 8.0s
+          <div className="mt-1 p-12 backdrop-blur-sm rounded-lg border border-white/10 w-3/5 mx-auto min-h-[400px]" style={{backgroundColor: 'rgb(177,197,206)'}}>
+            <div className="flex">
+              {/* Left Column - 40% */}
+              <div className="w-[40%] pr-6 text-left">
+                <div className="text-xs text-gray-600 mb-2">
+                  Active Button: {activeButton} | Progress: {timeProgress.toFixed(1)}px / {buttonWidths[activeButton]?.toFixed(0) || 'measuring...'}px | 
+                  Duration: 8.0s
+                </div>
+                <h2 className="text-[40px] font-extrabold text-gray-800 mb-2">{panelContent[activeButton].title}</h2>
+                <p className="text-xl font-light text-gray-800">
+                  {panelContent[activeButton].description}
+                </p>
+              </div>
+              
+              {/* Right Column - 60% */}
+              <div className="w-[60%]">
+                {/* Right column content can be added here */}
+              </div>
             </div>
-            <h3 className="text-lg font-semibold text-black mb-4">{panelContent[activeButton].title}</h3>
-            <p className="text-black text-sm">
-              {panelContent[activeButton].description}
-            </p>
           </div>
         </div>
       </div>
