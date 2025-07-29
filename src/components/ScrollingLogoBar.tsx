@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Lenis from '@studio-freight/lenis';
 
 export default function ScrollingLogoBar() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -70,7 +71,7 @@ export default function ScrollingLogoBar() {
     { name: 'CVS Healthcare', color: '#cc0000' },
   ];
 
-    return (
+  return (
     <section className="py-16 w-full bg-[#1a1a1a]">
       <div className="w-full px-4">
         <div className="text-center mb-12">
@@ -91,14 +92,14 @@ export default function ScrollingLogoBar() {
             {logos.map((logo, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center min-w-[120px] h-16 px-6 py-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-300 group"
+                className="flex items-center justify-center min-w-[120px] h-16 px-6 py-3 bg-white/5 backdrop-blur-sm rounded-lg hover:bg-white/10 transition-all duration-300 group"
               >
-                                 <div 
-                   className="text-white font-semibold text-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"
-                   style={{ color: logo.color }}
-                 >
-                   {logo.name}
-                 </div>
+                <div 
+                  className="text-white font-semibold text-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ color: logo.color }}
+                >
+                  {logo.name}
+                </div>
               </div>
             ))}
           </div>
